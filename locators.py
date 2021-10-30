@@ -22,4 +22,11 @@ class SortedCheckLocators:
     PRICE_ID = 'data-price'
 
 
+class CartLocators:
+    WARE = (By.XPATH, '//div[@class="col-6 col-sm-6 col-xl-4 mt-4 key_0"]')
+    BUY_BTN =(By.XPATH, '//div[@class="buy_buttons buy_buttons_ buy_buttons__   selected"]')
+    PRICE = (By.XPATH, '//span[@id="price"]')
+    PRICE_CART = (By.XPATH, '//div[@class="signprice signprice-small text-nowrap mt-1 text-right"]')
+
+
 

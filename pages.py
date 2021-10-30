@@ -114,5 +114,33 @@ class SortedCheck(MirBeer):
         return result_check
 
 
+class Cart(MirBeer):
+    def __init__(self, driver, url):
+        super().__init__(driver, url)
+        self.driver = driver
+        self.driver.get(url)
+        self.driver.add_cookie({'name': 'icity_confirmed', 'value': '1'})
+        self. driver.refresh()
+        actions = ActionChains(driver)
+        actions.send_keys(Keys.PAGE_DOWN)
+        actions.perform()
+        while True:
+            try:
+                self.ware = WebDriverWait(driver, 3).until(lambda d: d.find_element(*CartLocators.WARE))
+                break
+            except NoSuchElementException as ex:
+                print(f'Still wait...{ex}')
 
+    def get_ware_price(self):
+        self.ware.click()
+        price = self.driver.find_element(*CartLocators.PRICE).text
+        return price
 
+    def put_ware_to_cart(self):
+        buy_button = self.driver.find_element(*CartLocators.BUY_BTN)
+        buy_button.click()
+
+    def get_price_at_cart(self):
+        price_at_cart = WebDriverWait(self.driver, 3).until(
+            lambda d: d.find_element(*CartLocators.PRICE_CART))
+        return str(price_at_cart.text).split('.')[0]
