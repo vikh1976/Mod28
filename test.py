@@ -103,7 +103,7 @@ def test_search(selenium, search_value):
 @pytest.mark.positive
 def test_filter_price(selenium):
     """Тест фильтра по цене в результатах поиска. Доступный ценовой диапазон делится на три части
-    и цена подбирается ранодомно"""
+    и цена подбирается рандомно"""
     page = FilterCheck(selenium, filter_check_url)
     new_min_price, new_max_price = page.enter_filter_price()
     result = page.get_wares_witch_filter()
